@@ -1,18 +1,25 @@
-import React from "react";
-import Button from "../Button/Button";
+import React, { useContext } from "react";
+import Button from "../../Button/Button.component";
 
-import "./ProductItem.css";
+import "./ProductItem.styles.css";
 
-const ProductItem = (props) => {
-  removeProductHandler = () => {};
+import { ProductsContext } from "../../../contexts/products.context";
 
+const ProductItem = ({ name, price, id }) => {
+  const { removeProductFromList } = useContext(ProductsContext);
+
+  const removeProductHandler = () => {
+    removeProductFromList(id);
+  };
   return (
     <div className="product-item-container">
       <li className="product-item">
-        <h2>{props.name}</h2>
-        <p>Price: ${props.price}</p>
+        <h2>{name}</h2>
+        <p>Price: ${price}</p>
       </li>
-      <Button onClick={removeProductHandler}>Remove</Button>
+      <Button type="button" onClick={removeProductHandler}>
+        Remove
+      </Button>
     </div>
   );
 };

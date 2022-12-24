@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-import Input from "../Input/Input";
-import Button from "../Button/Button";
-import "./NewProduct.css";
+import Input from "../../Input/Input.component";
+import Button from "../../Button/Button.component";
+import "./NewProduct.styles.css";
 
-const NewProduct = (props) => {
+import { ProductsContext } from "../../../contexts/products.context";
+
+// product component
+// retrieves product info and adds product to PRODUCTS array
+const NewProduct = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredPrice, setEnteredPrice] = useState("");
+
+  const { addProductToList } = useContext(ProductsContext);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -18,7 +24,8 @@ const NewProduct = (props) => {
 
   const submitProductHandler = (event) => {
     event.preventDefault();
-    props.onAddProduct(enteredTitle, enteredPrice);
+    if (!enteredTitle || !enteredPrice) return;
+    addProductToList(enteredTitle, enteredPrice);
     setEnteredTitle("");
     setEnteredPrice("");
   };
@@ -31,6 +38,8 @@ const NewProduct = (props) => {
           type="text"
           label="Title"
           id="title"
+          minLength={3}
+          required={true}
           value={enteredTitle}
           onChange={titleChangeHandler}
         />
@@ -38,6 +47,7 @@ const NewProduct = (props) => {
           type="number"
           label="Price"
           step={0.01}
+          required={true}
           id="price"
           value={enteredPrice}
           onChange={priceChangeHandler}

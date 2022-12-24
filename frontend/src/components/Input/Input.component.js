@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import './Input.css';
+import "./Input.styles.css";
 
-const Input = props => {
+const Input = ({ id, label, type, step, value, onChange }) => {
   return (
     <div className="input">
-      <label htmlFor={props.id}>{props.label}</label>
+      <label htmlFor={id}>{label}</label>
       <input
-        type={props.type}
-        step={props.step}
-        id={props.id}
-        value={props.value}
-        onChange={props.onChange}
+        type={type}
+        step={step}
+        id={id}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );

@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './Button.css';
+import "./Button.styles.css";
 
-const Button = props => {
+const Button = ({ type, children, ...otherProps }) => {
   return (
-    <button className="button" type={props.type}>
-      {props.children}
+    <button className="button" type={type} {...otherProps}>
+      {children}
     </button>
   );
 };

@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './Header.css';
+import "./Header.styles.css";
 
-const Header = props => {
+const Header = () => {
   return (
     <header className="header">
-      <h1>MERN Shop</h1>
+      <h1>MERN Product List</h1>
     </header>
   );
 };

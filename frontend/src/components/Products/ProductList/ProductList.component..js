@@ -1,23 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import ProductItem from "./ProductItem";
-import "./ProductList.css";
+import ProductItem from "../ProductItem/ProductItem.component";
+import "./ProductList.styles.css";
 
-const ProductList = (props) => {
-  let content;
-  if (!props.items || props.items.length === 0) {
-    content = <p>Could not find any products. Add a product.</p>;
-  } else {
-    content = (
-      <ul className="product-list">
-        {props.items.map((p) => (
-          <ProductItem key={p.id} name={p.title} price={p.price} />
-        ))}
-      </ul>
-    );
-  }
+import { ProductsContext } from "../../../contexts/products.context";
 
-  return <section id="products">{content}</section>;
+// product list component
+// maps and renders products if PRODUCTS array exists else displays <p> text
+const ProductList = () => {
+  const { loadedProducts } = useContext(ProductsContext);
+
+  return (
+    <section id="products">
+      {loadedProducts.length ? (
+        <ul className="product-list">
+          {loadedProducts.map((product) => (
+            <ProductItem
+              key={product.id}
+              id={product.id}
+              name={product.title}
+              price={product.price}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p>Could not find any products. Please add a product.</p>
+      )}
+    </section>
+  );
 };
 
 export default ProductList;
